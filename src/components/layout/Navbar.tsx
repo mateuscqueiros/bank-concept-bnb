@@ -75,6 +75,7 @@ function NavItem({ text, icon, link, active }: NavItemProps) {
 
 export function Navbar({ opened, setOpened }: NavbarProps) {
   const path = usePathname();
+
   return (
     <nav
       className={cn([
@@ -114,6 +115,12 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
           alt="Logo BNB"
           priority
         />
+        <div className="flex flex-col items-center mt-4">
+          <span>&#169; 2024 Banco do Nordeste do Brasil</span>
+          <span className="text-center">
+            (Este é um app conceito, não afiliado a organização que representa)
+          </span>
+        </div>
       </div>
     </nav>
   );
