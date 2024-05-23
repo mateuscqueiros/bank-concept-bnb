@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'doodleipsum.com',
+        port: '',
+        pathname: '/700/avatar',
+      },
+    ],
+  },
+};
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')()
- 
-module.exports =
-  process.env.ANALYZE === 'true' ? withBundleAnalyzer(nextConfig) : nextConfig
+module.exports = nextConfig;

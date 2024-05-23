@@ -10,7 +10,7 @@ export function UserCard() {
         className="border-2 rounded-full h-[70px] w-[70px]"
         alt="Usuário"
       />
-      <h3>Mateus Queirós</h3>
+      <h3 className="ml-5 text-lg font-bold">Mateus Queirós</h3>
     </div>
   );
 }
