@@ -9,6 +9,7 @@ import {
   IconUserCircle,
   IconX,
 } from '@tabler/icons-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserCard } from '.';
@@ -104,6 +105,15 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
             />
           ))}
         </ul>
+      </div>
+      <div className="flex flex-col items-center p-4 text-sm">
+        <Image
+          width={70}
+          height={70}
+          src="/icons/logo-bnb.svg"
+          alt="Logo BNB"
+          priority
+        />
       </div>
     </nav>
   );
