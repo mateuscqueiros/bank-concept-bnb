@@ -1,3 +1,4 @@
+import { ApiProvider } from '@/lib/query-client';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <ApiProvider>{children}</ApiProvider>
         <Toaster richColors />
       </body>
     </html>
