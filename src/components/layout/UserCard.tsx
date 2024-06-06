@@ -1,6 +1,8 @@
+import { useUser } from '@/features/auth';
 import Image from 'next/image';
 
 export function UserCard() {
+  const { data: user } = useUser();
   return (
     <div className="flex flex-row justify-center items-center p-4">
       <Image
@@ -10,7 +12,7 @@ export function UserCard() {
         className="border-2 rounded-full h-[70px] w-[70px]"
         alt="Usuário"
       />
-      <h3 className="ml-5 text-lg font-bold">Mateus Queirós</h3>
+      {user && <h3 className="ml-5 text-lg font-bold">{user.name}</h3>}
     </div>
   );
 }
