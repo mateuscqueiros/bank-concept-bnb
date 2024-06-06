@@ -12,7 +12,7 @@ export type FormItemProps = {
 export const inputStyles =
   'input w-full border-2 border-primary bg-transparent text-primary rounded-full placeholder:text-primary';
 export const selectStyles =
-  'select select-bordered w-full rounded-full border-primary border-2 text-primary';
+  'select select-bordered w-full rounded-full border-primary border-2 text-primary bg-transparent';
 
 export function FormItem({ error, label, children }: FormItemProps) {
   return (

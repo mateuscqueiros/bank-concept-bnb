@@ -2,6 +2,7 @@
 import { Button, CreditCard } from '@/components/elements';
 import { HomeInfoSection } from '@/components/layout';
 import { useUser } from '@/features/auth';
+import { TransactionList } from '@/features/transactions';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
 
 export default function Home() {
@@ -55,6 +56,12 @@ export default function Home() {
         <div className="block mt-10 xl:hidden">
           <HomeInfoSection />
         </div>
+        <div className="mt-10">
+          <TransactionList title="Transações recentes" />
+        </div>
+      </div>
+      <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
+        <HomeInfoSection />
       </div>
     </div>
   );
