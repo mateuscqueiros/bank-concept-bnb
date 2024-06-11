@@ -1,3 +1,4 @@
 export * from './Button';
 export * from './CreditCard';
-export * from './Tabs'
+export * from './Progress';
+export * from './Tabs';
