@@ -11,7 +11,7 @@ export async function createTransaction(data: TransactionType) {
 
 export async function updateTransaction(
   id: TransactionType['id'],
-  data: TransactionType
+  data: Omit<TransactionType, 'id'>
 ) {
   return axios.put<TransactionType>(`/transactions/${id}`, data);
 }
