@@ -1,6 +1,7 @@
 import { ApiProvider } from '@/lib/query-client';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import 'react-datepicker/dist/react-datepicker.css';
 import { Toaster } from 'sonner';
 import './globals.css';
 
