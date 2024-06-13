@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Header, Navbar } from '.';
 
 export function Navigation() {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   return (
     <>
       <Header setOpened={setOpened} />

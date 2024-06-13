@@ -52,13 +52,14 @@ type NavItemProps = {
   icon: JSX.Element;
   link: string;
   active: string;
+  setOpened: (value: boolean) => void;
 };
 
-function NavItem({ text, icon, link, active }: NavItemProps) {
+function NavItem({ text, icon, link, active, setOpened }: NavItemProps) {
   const isActive = link === active;
   return (
     <li>
-      <Link href={link}>
+      <Link href={link} onClick={() => setOpened(false)}>
         <div
           className={cn([
             'flex flex-row items-center h-10 px-8 py-6 hover:bg-secondary',
@@ -103,6 +104,7 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
               text={navItem.text}
               key={navItem.link}
               active={path}
+              setOpened={setOpened}
             />
           ))}
         </ul>
