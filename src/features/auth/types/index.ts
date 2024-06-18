@@ -22,7 +22,9 @@ export const registerFormSchema = z
   .required();
 
 export type RegisterFormType = z.infer<typeof registerFormSchema>;
-export type UserType = RegisterFormType;
+export type UserType = RegisterFormType & {
+  id: number;
+};
 
 export type UserResponseType = {
   accessToken: string;

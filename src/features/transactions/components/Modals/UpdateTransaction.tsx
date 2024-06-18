@@ -1,37 +1,39 @@
 import { Modal } from '@/components/elements';
 import { useUser } from '@/features/auth';
-import { uuid } from '@/lib/utils';
 import { useModalStore } from '@/stores/modals';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { useCreateTransaction } from '../../api';
+import { useTransactions, useUpdateTransaction } from '../../api';
 import { TransactionFormType } from '../../types';
 import { DefaultTransactionForm } from '../Form';
 
-// Salvar na API (mutação do Tanstack Query)
-// Verificar se usuário está autenticado
-// Fechar modal
-
-export function CreateTransactionModal() {
-  const thisModalName = 'createTransaction';
-
-  const createTransaction = useCreateTransaction();
+export function UpdateTransactionModal() {
+  const thisModalName = 'updateTransaction';
+  const updateTransaction = useUpdateTransaction();
   const close = useModalStore.use.close();
   const { data: user } = useUser();
   const router = useRouter();
 
+  const { data: transactions } = useTransactions();
+  const thisModalState = useModalStore.use
+    .modals()
+    .find((m) => m.name === thisModalName)!;
+
+  const transactionData = transactions.find(
+    (t) => t.id === thisModalState.dataId
+  );
+
   const onSubmit = (values: TransactionFormType) => {
-    if (user) {
+    if (user && transactionData) {
       const data = {
-        id: uuid(),
         ...values,
         userId: user.id,
       };
-      createTransaction
-        .mutateAsync({ data })
+      updateTransaction
+        .mutateAsync({ data, id: transactionData?.id })
         .then(() => {
           close(thisModalName);
-          toast.success('Transação criada');
+          toast.success('Transação atualizada');
         })
         .catch((err) => {
           if (err.response.status === 401) {
@@ -45,9 +47,17 @@ export function CreateTransactionModal() {
         });
     }
   };
+
+  if (!transactionData && thisModalState.open) {
+    return toast.error('Transação não existe');
+  }
+
   return (
-    <Modal name={thisModalName} title="Transação">
-      <DefaultTransactionForm onSubmit={onSubmit} />
+    <Modal actions={undefined} title="Transação" name={thisModalName}>
+      <DefaultTransactionForm
+        defaultValues={transactionData}
+        onSubmit={onSubmit}
+      />
     </Modal>
   );
 }
