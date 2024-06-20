@@ -42,10 +42,9 @@ export function CategoriesProgress({ className }: { className?: string }) {
   const { data: categories } = useCategories();
   const { data: transactions } = useTransactions();
 
-  let totalExpenses = transactions.reduce(
-    (acc, transaction) => transaction.value + acc,
-    0
-  );
+  let totalExpenses = transactions
+    ? transactions.reduce((acc, transaction) => transaction.value + acc, 0)
+    : 0;
   let infoIteration = totalExpenses / 4;
   let accInfo = totalExpenses;
 
@@ -67,7 +66,7 @@ export function CategoriesProgress({ className }: { className?: string }) {
         className,
       ])}
     >
-      {transactions.length > 0 && (
+      {transactions?.length > 0 && (
         <>
           <div className="flex flex-row relative">
             <div className="flex flex-col justify-between text-sm h-full mr-10">
@@ -97,7 +96,7 @@ export function CategoriesProgress({ className }: { className?: string }) {
           </div>
         </>
       )}
-      {transactions.length === 0 && (
+      {transactions?.length === 0 && (
         <div className="flex flex-col w-full items-center">Sem transações</div>
       )}
     </div>

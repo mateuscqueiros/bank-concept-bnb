@@ -7,10 +7,9 @@ import { TransactionList } from '../components';
 export function TransactionsPage() {
   const { data: transactions } = useTransactions();
 
-  const totalExpenses = transactions.reduce(
-    (acc, transaction) => transaction.value + acc,
-    0
-  );
+  const totalExpenses = transactions
+    ? transactions.reduce((acc, transaction) => transaction.value + acc, 0)
+    : 0;
 
   return (
     <div className="flex flex-col p-6 pt-10">
@@ -36,7 +35,7 @@ export function TransactionsPage() {
         <CategoriesProgress className="flex flex-col max-w-[600px] w-full mx-auto gap-10" />
       </div>
       <div className="flex flex-col max-w-[600px] w-full mx-auto gap-10">
-        {transactions.length > 0 && <TransactionList title="Todas" />}
+        <TransactionList title="Todas" />
       </div>
     </div>
   );

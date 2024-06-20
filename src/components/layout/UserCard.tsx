@@ -3,8 +3,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export function UserCard() {
-  const { data: user } = useUser();
+  const { data: user, isFetching } = useUser();
   const router = useRouter();
+
+  if (isFetching) {
+    return <UserCardSkeleton />;
+  }
 
   return (
     <div className="flex flex-row justify-center items-center p-4">
@@ -29,6 +33,18 @@ export function UserCard() {
           </span>
         </div>
       )}
+    </div>
+  );
+}
+
+export function UserCardSkeleton() {
+  return (
+    <div className="flex flex-row justify-center items-center p-4">
+      <div className="skeleton rounded-full w-16 h-16"></div>
+      <div className="ml-5 flex flex-col gap-2">
+        <h3 className="skeleton h-4 w-32"></h3>
+        <span className="skeleton h-4 w-10"></span>
+      </div>
     </div>
   );
 }

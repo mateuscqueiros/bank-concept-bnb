@@ -22,6 +22,7 @@ export function LoginForm({ initialValues, onSubmit }: LoginFormProps) {
     resolver: zodResolver(loginFormSchema),
     defaultValues: initialValues || DEFAULT_LOGIN_FORM_VALUES,
   });
+
   return (
     <form
       onSubmit={handleSubmit((values) => onSubmit && onSubmit(values, reset))}
@@ -37,7 +38,7 @@ export function LoginForm({ initialValues, onSubmit }: LoginFormProps) {
           {...register('password')}
         />
       </FormItem>
-      <Button className="btn-primary w-full" type="submit">
+      <Button className="btn-primary w-full mt-4" type="submit">
         Salvar
       </Button>
     </form>

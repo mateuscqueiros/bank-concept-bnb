@@ -6,11 +6,13 @@ import { TransactionList } from '@/features/transactions';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
 
 export default function Home() {
-  const { data: user } = useUser();
+  const { data: user, isFetching } = useUser();
+
   return (
     <div className="flex flex-row w-full xl:max-w-[calc(50%-60px)]">
       <div className="flex flex-col flex-1 p-6 pt-10 h-full">
         <div className="flex flex-col items-start justify-start mb-20">
+          {isFetching && <HomeTitleSkeleton />}
           {user && (
             <>
               <h1 className="text-3xl font-bold">Olá {user.name}!</h1>
@@ -23,13 +25,10 @@ export default function Home() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Cartão de crédito</h2>
           <div className="flex flex-row flex-wrap gap-x-10 gap-y-5 items-center w-full">
-            {user && (
-              <CreditCard
-                name={user.name}
-                logo="/icons/logo-bnb.svg"
-                brand="/icons/mastercard.svg"
-              />
-            )}
+            <CreditCard
+              logo="/icons/logo-bnb.svg"
+              brand="/icons/mastercard.svg"
+            />
             <div className="max-w-[200px]">
               <div className="flex flex-row items-center">
                 <IconInfoCircle />
@@ -64,5 +63,14 @@ export default function Home() {
         <HomeInfoSection />
       </div>
     </div>
+  );
+}
+
+export function HomeTitleSkeleton() {
+  return (
+    <>
+      <h1 className="skeleton h-8 w-32 mb-3"></h1>
+      <span className="skeleton h-8 w-64 max-w-[320px]"></span>
+    </>
   );
 }

@@ -40,7 +40,7 @@ export function RegisterForm({ initialValues, onSubmit }: RegisterFormProps) {
           {...register('password')}
         />
       </FormItem>
-      <Button className="btn-primary w-full" type="submit">
+      <Button className="btn-primary w-full mt-4" type="submit">
         Salvar
       </Button>
     </form>

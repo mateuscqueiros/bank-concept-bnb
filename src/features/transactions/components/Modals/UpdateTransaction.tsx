@@ -21,9 +21,8 @@ export function UpdateTransactionModal() {
     .modals()
     .find((m) => m.name === thisModalName)!;
 
-  const transactionData = transactions.find(
-    (t) => t.id === thisModalState.dataId
-  );
+  const transactionData =
+    transactions && transactions.find((t) => t.id === thisModalState.dataId);
 
   const onSubmit = (values: TransactionFormType) => {
     if (user && transactionData) {
