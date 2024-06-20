@@ -1,7 +1,8 @@
 import { useModalStore } from '@/stores/modals';
+import { IconTrash } from '@tabler/icons-react';
+import { toast } from 'sonner';
 import { useDeleteTransaction } from '../api';
 import { TransactionType } from '../types';
-import { IconTrash } from '@tabler/icons-react';
 
 export function DeleteTransaction({
   itemId,
@@ -17,10 +18,16 @@ export function DeleteTransaction({
           type="button"
           className="flex items-center justify-center rounded-md btn-sm btn-square bg-transparent border-primary border-2 hover:bg-primary hover:border-transparent text-primary hover:text-white"
           onClick={() => {
-            closeModal('updateTransaction');
             deleteTransaction
               .mutateAsync({ id: itemId })
-              .catch((err) => console.log('delete err', err));
+              .then(() => {
+                closeModal('updateTransaction');
+                toast.success('Transação deletada');
+              })
+              .catch((err) => {
+                console.log('delete err', err);
+                toast.error('Não foi possível deletar a transação');
+              });
           }}
         >
           <IconTrash size={24} />

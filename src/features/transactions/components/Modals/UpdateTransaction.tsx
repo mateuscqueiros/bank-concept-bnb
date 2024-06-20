@@ -3,6 +3,7 @@ import { useUser } from '@/features/auth';
 import { useModalStore } from '@/stores/modals';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { DeleteTransaction } from '../../actions';
 import { useTransactions, useUpdateTransaction } from '../../api';
 import { TransactionFormType } from '../../types';
 import { DefaultTransactionForm } from '../Form';
@@ -53,7 +54,15 @@ export function UpdateTransactionModal() {
   }
 
   return (
-    <Modal actions={undefined} title="Transação" name={thisModalName}>
+    <Modal
+      actions={
+        thisModalState?.dataId ? (
+          <DeleteTransaction itemId={thisModalState?.dataId} />
+        ) : undefined
+      }
+      title="Transação"
+      name={thisModalName}
+    >
       <DefaultTransactionForm
         defaultValues={transactionData}
         onSubmit={onSubmit}

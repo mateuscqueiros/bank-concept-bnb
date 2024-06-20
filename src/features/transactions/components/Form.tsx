@@ -2,6 +2,7 @@
 import { Button } from '@/components/elements';
 import { FormItem, inputStyles, selectStyles } from '@/components/forms';
 import { useCategories } from '@/features/categories';
+import { DefaultFormProps } from '@/types';
 import { PAYMENT_METHODS } from '@/values/data';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ReactDatePicker from 'react-datepicker';
@@ -10,10 +11,7 @@ import { NumericFormat } from 'react-number-format';
 import { TransactionFormType, transactionSchema } from '../types';
 import { DEFAULT_TRANSACTION_FORM_VALUES } from '../values';
 
-export type DefaultTransactionFormProps = {
-  defaultValues?: TransactionFormType;
-  onSubmit?: (values: TransactionFormType) => void;
-};
+export type DefaultTransactionFormProps = DefaultFormProps<TransactionFormType>;
 
 export function DefaultTransactionForm({
   defaultValues,
