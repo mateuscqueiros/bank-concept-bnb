@@ -1,5 +1,6 @@
 import { Modal } from '@/components/elements';
 import { useUser } from '@/features/auth';
+import { catchErrors } from '@/lib/api-client';
 import { uuid } from '@/lib/utils';
 import { useModalStore } from '@/stores/modals';
 import { useRouter } from 'next/navigation';
@@ -34,14 +35,11 @@ export function CreateTransactionModal() {
           toast.success('Transação criada');
         })
         .catch((err) => {
-          if (err.response.status === 401) {
-            toast('Você não está logado', {
-              action: {
-                label: 'Ir para login',
-                onClick: () => router.push('/login'),
-              },
-            });
-          }
+          catchErrors({
+            err,
+            fallbackMessage: 'Não foi possível criar a transação',
+            router,
+          });
         });
     }
   };

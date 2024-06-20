@@ -1,5 +1,6 @@
 import { Modal } from '@/components/elements';
 import { useUser } from '@/features/auth';
+import { catchErrors } from '@/lib/api-client';
 import { useModalStore } from '@/stores/modals';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -33,20 +34,13 @@ export function UpdateCategoryModal() {
           closeModal(thisModalName);
           toast.success('Categoria atualizada');
         })
-        .catch((err) => {
-          if (err.response.status === 401) {
-            toast.error('Você não está logado', {
-              action: {
-                label: 'Ir para login',
-                onClick: () => router.push('/login'),
-              },
-            });
-            return;
-          }
-          toast.error('Não foi possível criar a transação', {
-            description: err.message,
-          });
-        });
+        .catch((err) =>
+          catchErrors({
+            err,
+            fallbackMessage: 'Não foi possível atualizar a categoria',
+            router,
+          })
+        );
     }
   };
 

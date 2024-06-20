@@ -1,5 +1,6 @@
 import { Modal } from '@/components/elements';
 import { useUser } from '@/features/auth';
+import { catchErrors } from '@/lib/api-client';
 import { useModalStore } from '@/stores/modals';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -29,16 +30,13 @@ export function CreateCategoryModal() {
           close(thisModalName);
           toast.success('Categoria criada');
         })
-        .catch((err) => {
-          if (err.response.status === 401) {
-            toast('Você não está logado', {
-              action: {
-                label: 'Ir para login',
-                onClick: () => router.push('/login'),
-              },
-            });
-          }
-        });
+        .catch((err) =>
+          catchErrors({
+            err,
+            fallbackMessage: 'Não foi possível criar a categoria',
+            router,
+          })
+        );
     }
   };
 
