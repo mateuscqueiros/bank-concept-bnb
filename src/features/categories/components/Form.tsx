@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/elements';
 import { FormItem, inputStyles, selectStyles } from '@/components/forms';
 import { DefaultFormProps } from '@/types';
